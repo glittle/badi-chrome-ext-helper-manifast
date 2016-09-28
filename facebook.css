@@ -1,0 +1,20 @@
+/* fire of God */
+/* air of eternity */
+/* water of Divine Unity */
+/* earth */
+.bDay {
+  border-radius: 3px;
+  padding: 0 3px 0 3px;
+}
+.bDay.element1 {
+  background-color: #ffe6e6;
+}
+.bDay.element2 {
+  background-color: #fafafa;
+}
+.bDay.element3 {
+  background-color: #e8e8ff;
+}
+.bDay.element4 {
+  background-color: #e6ffe6;
+}
