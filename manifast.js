@@ -34,7 +34,7 @@ function addDateInfo(watchedDomElement) {
   switch (tag) {
     case 'SPAN':
       var txt = el.text();
-      if(!txt){
+      if (!txt) {
         return;
       }
       var date = moment(txt, '-, D MMM YYYY');
@@ -49,9 +49,7 @@ function addDateInfo(watchedDomElement) {
       return;
   }
 
-
   var toInsert = [];
-  $('.bDay').remove();
 
   chrome.runtime.sendMessage(parentExtId, {
     cmd: 'getInfo',
@@ -72,11 +70,14 @@ function addDateInfo(watchedDomElement) {
 }
 
 function addThem(toInsert) {
+  // log('to insert');
   chrome.runtime.sendMessage(parentExtId, {
     cmd: 'dummy' // just to get in the queue after all the ones above
   },
     function () {
       // console.log(`insert ${toInsert.length} elements`);
+      // log(toInsert);
+      $('.bDay').remove(); // only doing one on the page, so remove it now
       for (var j = 0; j < toInsert.length; j++) {
         var item = toInsert[j];
         item[1].insertAfter(item[0]);
