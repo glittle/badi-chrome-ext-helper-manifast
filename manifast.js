@@ -33,31 +33,13 @@ function addDateInfo(watchedDomElement) {
 
   switch (tag) {
     case 'SPAN':
-      var abbr = el.closest('abbr');
-      if (abbr.data('bdateAdded')) {
-        // log('already done a');
+      var txt = el.text();
+      if(!txt){
         return;
       }
-      abbr.data('bdateAdded', true);
-      var utime = abbr.data('utime');
-      var when = new Date(0);
-      when.setUTCSeconds(utime);
-      time = when.getTime();
-      originalElement = watchedDomElement;
-      break;
+      var date = moment(txt, '-, D MMM YYYY');
 
-    case 'ABBR':
-      // var abbr = el;
-      // if (abbr.data('bdateAdded')) {
-      //   log('already done b');
-      //   return;
-      // }
-      el.data('bdateAdded', true);
-
-      var utime = el.data('utime');
-      var when = new Date(0);
-      when.setUTCSeconds(utime);
-      time = when.getTime();
+      time = date.valueOf();
       originalElement = watchedDomElement;
       break;
 
@@ -69,11 +51,12 @@ function addDateInfo(watchedDomElement) {
 
 
   var toInsert = [];
+  $('.bDay').remove();
 
   chrome.runtime.sendMessage(parentExtId, {
     cmd: 'getInfo',
     targetDay: time,
-    labelFormat: '{bMonthNamePri} {bDay}'
+    labelFormat: '{bDay} {bMonthNamePri} {bYear}'
   },
     function (info) {
       var newElement = $('<span/>',
@@ -97,7 +80,6 @@ function addThem(toInsert) {
       for (var j = 0; j < toInsert.length; j++) {
         var item = toInsert[j];
         item[1].insertAfter(item[0]);
-        $('<span role="presentation" aria-hidden="true"> · </span>').insertAfter(item[0]);
       }
     });
 }
@@ -106,7 +88,6 @@ var refreshCount = 0;
 function calendarUpdated(watchedDomElement) {
   refreshCount++;
 
-  // seems to redraw twice on first load
   var threshold = 0;
 
   // log('updated!');
@@ -115,40 +96,6 @@ function calendarUpdated(watchedDomElement) {
   if (refreshCount > threshold) {
     addDateInfo(watchedDomElement);
   }
-}
-
-function calendarDefaults() {
-  // window['INITIAL_DATA'][2][0][0].substr(window['INITIAL_DATA'][2][0][0].indexOf('dtFldOrdr')+12,3)
-
-  var master = document.getElementById('calmaster').innerHTML;
-
-  return {
-    dtFldOrdr: master.match(/'dtFldOrdr','(.*?)'/)[1],
-    defaultCalMode: master.match(/'defaultCalMode','(.*?)'/)[1],
-    locale: master.match(/'locale','(.*?)'/)[1]
-  }
-
-  // other settings: 
-  // 'dtFldOrdr','DMY'
-  // 'firstDay','1'
-  // 'defaultCalMode','week'
-  // 'locale','en'
-
-  // 0 MDY 12/31/2016
-  // 1 DMY 31/12/2016
-  // 2 YMD 2016-12-31
-}
-
-function byFormat(mdy, dmy, ymd) {
-  switch (calendarSettings.dtFldOrdr) {
-    case 'MDY':
-      return mdy;
-    case 'DMY':
-      return dmy;
-    case 'YMD':
-      return ymd;
-  }
-  return '';
 }
 
 (function (win) {
@@ -214,12 +161,13 @@ function getStarted() {
           + ` (version ${chrome.runtime.getManifest().version})`
           + ` (main extension: ${parentExtId})`);
 
-        ready('abbr.livetimestamp', function (el) {
+        ready('span.commentDateLong', function (el) {
           calendarUpdated(el);
         });
-        ready('.timestampContent', function (el) {
-          calendarUpdated(el);
-        });
+
+        $('span.commentDateLong').on('DOMSubtreeModified', function (ev) {
+          calendarUpdated(ev.target);
+        })
       }
     });
 }
@@ -271,8 +219,4 @@ function showErrors() {
   }
 }
 
-
-
-
 findParentExtension();
-

@@ -5,6 +5,9 @@
 .bDay {
   border-radius: 3px;
   padding: 0 3px 0 3px;
+  font-size: 80%;
+  margin: 0 0 0 8px;
+  font-weight: 500;
 }
 .bDay.element1 {
   background-color: #ffe6e6;

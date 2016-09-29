@@ -16,7 +16,7 @@
   },
   "content_security_policy": "script-src 'self'; object-src 'self'",
   "author": "Glen Little",
-  "short_name": "BadiCalFacebook",
+  "short_name": "BadiCalManifast",
   "manifest_version": 2,
   "incognito": "split",
   "content_scripts": [
@@ -25,13 +25,13 @@
         "jquery-2.1.3.min.js",
         "moment.js",
         "shared.js",
-        "facebook.js"
+        "manifast.js"
       ],
       "css": [
-        "facebook.css"
+        "manifast.css"
       ],
       "matches": [
-        "https://www.facebook.com/*"
+        "https://app.manifast.com/*"
       ]
     }
   ]

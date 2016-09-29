@@ -1,10 +1,10 @@
 {
   "title": {
-    "message": "Badí' Calendar - Helper for Facebook",
+    "message": "Badí' Calendar - Helper for Manifast",
     "description": "The title of the extension as shown in the store and other places"
   },
   "titleDesc": {
-    "message": "Helper for the Badí' Calender Extension, to show Badí' dates in Facebook web pages.",
+    "message": "Helper for the Badí' Calender Extension, to show Badí' dates in Manifast web pages.",
     "description": "Used in the manifest"
   },
   "confirmationMsg": {
@@ -12,7 +12,7 @@
     "description": "shown in the console"
   },
   "Chrome_History": {
-    "message": "https://sites.google.com/site/badicalendartools/home/web-extension/helper-for-facebook",
+    "message": "https://sites.google.com/site/badicalendartools/home/web-extension/helper-for-manifast",
     "description": "about page"
   }
 }

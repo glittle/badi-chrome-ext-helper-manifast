@@ -1,11 +1,13 @@
 # Badí' Calendar Chrome Extension #
-# Helper for Facebook #
+# Helper for Manifast #
 
 ### Current Features ###
 
-* See https://sites.google.com/site/badicalendartools/home/web-extension/helper-for-facebook
+* See https://sites.google.com/site/badicalendartools/home/web-extension/helper-for-Manifast
 
-* Install at https://chrome.google.com/webstore/detail/bad%C3%AD-calendar-helper-for/gcibcpemgciakojkkpjkdpbfkmikncle 
+* Manifast details at http://www.manifast.com
+
+* Install at https://chrome.google.com/webstore/ 
 
 ### Who do I talk to? ###
 
